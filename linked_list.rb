@@ -2,8 +2,19 @@
 
 # class which will store linked list
 class LinkedList
+  def initialize
+    @head = nil
+    @tail = nil
+  end
+
   def append(value)
-    # adds a new node containing value to the end of the list
+    if @head.nil?
+      @head = Node.new(value)
+    else
+      current = @head
+      current = current.next_node until current.next_node.nil?
+      current.next_node = Node.new(value)
+    end
   end
 
   def prepend(value)
@@ -15,11 +26,13 @@ class LinkedList
   end
 
   def head
-    # returns first node in list
+    # returns the first node in the list
+    @head
   end
 
   def tail
-    # returns last node in list
+    # returns the last node in the list
+    @tail
   end
 
   def at(index)
