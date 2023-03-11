@@ -18,20 +18,27 @@ class LinkedList
   end
 
   def prepend(value)
-    # adds a new node containing value to the start of the list
+    prepended = Node.new(value)
+    prepended.next_node = @head
+    @head = prepended
   end
 
   def size
     # returns total number of nodes
+    count = 1
+    current = @head
+    until current.next_node.nil?
+      count += 1
+      current = current.next_node
+    end
+    "Nodes: #{count}"
   end
 
   def head
-    # returns the first node in the list
     @head
   end
 
   def tail
-    # returns the last node in the list
     @tail
   end
 
