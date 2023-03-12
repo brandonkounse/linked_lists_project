@@ -2,6 +2,8 @@
 
 # class which will store linked list
 class LinkedList
+  attr_reader :head, :tail
+
   def initialize
     @head = nil
     @tail = nil
@@ -14,6 +16,7 @@ class LinkedList
       current = @head
       current = current.next_node until current.next_node.nil?
       current.next_node = Node.new(value)
+      @tail = current.next_node
     end
   end
 
@@ -33,16 +36,6 @@ class LinkedList
     count
   end
 
-  def head
-    @head
-  end
-
-  def tail
-    current = @head
-    current = current.next_node until current.next_node.nil?
-    @tail = current
-  end
-
   def at(index)
     if index > size
       'index is out of range'
@@ -56,7 +49,10 @@ class LinkedList
   end
 
   def pop
-    # removes last element from list
+    current = @head
+    current = current.next_node until current.next_node == @tail
+    current.next_node = nil
+    @tail = current
   end
 
   def contains?(value)
