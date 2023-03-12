@@ -24,14 +24,13 @@ class LinkedList
   end
 
   def size
-    # returns total number of nodes
     count = 1
     current = @head
     until current.next_node.nil?
       count += 1
       current = current.next_node
     end
-    "Nodes: #{count}"
+    count
   end
 
   def head
@@ -39,11 +38,21 @@ class LinkedList
   end
 
   def tail
-    @tail
+    current = @head
+    current = current.next_node until current.next_node.nil?
+    @tail = current
   end
 
   def at(index)
-    # returns node at given index
+    if index > size
+      'index is out of range'
+    else
+      current = @head
+      index.times do
+        current = current.next_node
+      end
+    end
+    current
   end
 
   def pop
