@@ -26,9 +26,7 @@ class LinkedList
     @head = prepended
   end
 
-  def size
-    count = 1
-    current = @head
+  def size(count = 1, current = @head)
     until current.next_node.nil?
       count += 1
       current = current.next_node
@@ -36,11 +34,10 @@ class LinkedList
     count
   end
 
-  def at(index)
+  def at(index, current = @head)
     if index > size
       'index is out of range'
     else
-      current = @head
       index.times do
         current = current.next_node
       end
@@ -55,9 +52,7 @@ class LinkedList
     @tail = current
   end
 
-  def contains?(value)
-    current = @head
-    bool = false
+  def contains?(value, current = @head, bool: false)
     until current.nil?
       bool = true if current.value == value
       current = current.next_node
@@ -65,8 +60,16 @@ class LinkedList
     bool
   end
 
-  def find(value)
-    # returns the index of the node containing value, or nil if not found
+  def find(value, current = @head, index = 0)
+    if contains?(value)
+      until current.value == value
+        index += 1
+        current = current.next_node
+      end
+    else
+      index = nil
+    end
+    index
   end
 
   def to_s
